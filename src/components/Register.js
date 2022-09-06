@@ -4,10 +4,7 @@ import { onNavigate } from "../main.js";
 export const Register = () => {
     const HomeDiv = document.createElement('div');
     HomeDiv.className = 'homeDiv';
-    HomeDiv.textContent = 'Bienvenido al registro';
-
-    /* ---------- */
-
+      /* ---------- */
     const logoTitleDiv = document.createElement('div');
     logoTitleDiv.className = 'logoTitleDiv';
 
@@ -18,9 +15,17 @@ export const Register = () => {
     imgLogo.src = '../img/logo.png';
     imgLogo.id = 'imgLogo';
 
+    const TitleRegister =document.createElement('h3')
+    TitleRegister.textContent = 'FORMULARIO DE REGISTRO';
+    TitleRegister.className='TitleRegister'
+
+
     /* ---------- */
-    const formLogin = document.createElement('form');
-    formLogin.className = 'formLogin';
+    const pRegister = document.createElement('h3');
+    pRegister.textContent = 'INGRESA TUS DATOS Y CREA TU CUENTA';
+      
+    const formRegister = document.createElement('form');
+    formRegister.className = 'formRegister';
 
     const inputName = document.createElement('input');
     inputName.type = 'text';
@@ -33,33 +38,43 @@ export const Register = () => {
     const inputPassword = document.createElement('input');
     inputPassword.type = 'password';
     inputPassword.placeholder = 'Ingresa tu contraseña';
+    
+    const formDiv = document.createElement('div');
 
-    const buttonRegister = document.createElement('input');
+    const buttonRegister = document.createElement('button')
+    buttonRegister.textContent = 'REGISTRARSE';
     buttonRegister.value = 'Registrarse';
-    buttonRegister.id = 'buttonRegister';
     buttonRegister.setAttribute("type", "submit");
 
     const buttonHome = document.createElement('button');
-    buttonHome.textContent = 'Regresar al Home';
+    buttonHome.textContent = 'REGRESAR';
 
     buttonHome.addEventListener('click', () => onNavigate('/'));
 
 
-    imgLogoDiv.appendChild(imgLogo);
+HomeDiv.appendChild(TitleRegister);   imgLogoDiv.appendChild(imgLogo);
     logoTitleDiv.appendChild(imgLogoDiv);
+    
     HomeDiv.appendChild(logoTitleDiv);
 
-    formLogin.appendChild(inputName);
-    formLogin.appendChild(inputEmail);
-    formLogin.appendChild(inputPassword);
-    formLogin.appendChild(buttonRegister);
-    HomeDiv.appendChild(formLogin);
-    HomeDiv.appendChild(buttonHome);
+    formRegister.appendChild(inputName);
+    formRegister.appendChild(inputEmail);
+    formRegister.appendChild(inputPassword);
+    formRegister.appendChild(buttonRegister);
+    formRegister.appendChild(buttonHome);
+    
+    formDiv.appendChild(pRegister);
+    formDiv.appendChild(formRegister);
+    
+    
+    HomeDiv.appendChild(pRegister);
+    HomeDiv.appendChild(formRegister);
+    HomeDiv.appendChild(formDiv);
 
-    formLogin.addEventListener("submit", (e) => {
+    formRegister.addEventListener("submit", (e) => {
         e.preventDefault();
-        crearCuenta( inputEmail.value , inputPassword.value)
-            
+        crearCuenta(inputEmail.value, inputPassword.value)
+
     })
 
     return HomeDiv;

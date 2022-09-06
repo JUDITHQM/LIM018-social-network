@@ -1,1 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
 
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+        background-image: linear-gradient(90deg, rgb(240, 241, 231) 0%, rgba(219, 208, 184, 0.541) 0%), url('./img/personas.jpg');
+        margin: 0px;
+        padding: 0px;
+        background-size: cover;
+
+}
+.homeDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 3%;
+    border-radius: 8px;
+ 
+}
+.homeDiv button{
+    margin: 5px;
+    width: 80%;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 20px;    
+    border: 2px solid rgb(243, 152, 15);
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #f4b509c3;
+}
+.formRegister ::placeholder{
+    font-size: 15px;
+    font-weight: 70;
+}
+.formLogin ::placeholder{
+    font-size: 15px;
+    font-weight: 70;
+}
+.formRegister input{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;   
+    border: 3px outset rgb(255, 201, 5);
+    font-size: 80%;
+    width: 80%;
+    border-radius: 8px;
+    font-size: 22px;    
+    border: 2px solid rgb(231, 194, 12);
+    cursor: pointer;
+    margin-top: 13px;
+
+}
+.formLogin input{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;   
+    border: 3px outset rgb(255, 201, 5);
+    font-size: 80%;
+    width: 80%;
+    border-radius: 8px;
+    font-size: 22px;    
+    border: 2px solid rgb(231, 194, 12);
+    cursor: pointer;
+    margin-top: 13px;
+
+}
+button:hover{
+    color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    
+}
+
+.formLogin{  
+    width: 25%;
+    height: 30%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: auto;
+}
+.formRegister{
+    width: 25%;
+    height: 30%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: auto;
+
+}

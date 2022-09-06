@@ -2,8 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
-} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,signInWithPopup,GoogleAuthProvider} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,5 +23,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-export{createUserWithEmailAndPassword,auth,signInWithEmailAndPassword,signOut}
+export{signInWithPopup,GoogleAuthProvider,provider,createUserWithEmailAndPassword,auth,signInWithEmailAndPassword,signOut}
