@@ -2,7 +2,6 @@
 import { iniciarSesion, loginwithGoogle } from "../firebase/firebaseAuth.js";
 import { onNavigate } from "../main.js";
 
-
 export const Login = () => {
     const HomeDiv = document.createElement('div');
     HomeDiv.className = 'homeDiv';
@@ -89,7 +88,5 @@ export const Login = () => {
         e.preventDefault();
         loginwithGoogle();
       });
-
     return HomeDiv;
-
 }

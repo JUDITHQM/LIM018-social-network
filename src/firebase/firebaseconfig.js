@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
-import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,signInWithPopup,GoogleAuthProvider} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
+
+import { getFirestore, addDoc, collection, getDocs,doc , getDoc } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,9 +21,33 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
+// Variable para obtener la autenciación de usuario
 const auth = getAuth(app);
+// Variable para obtener autenticación con Google
 const provider = new GoogleAuthProvider();
+// Variable que nos conecta con la database de Firebase
+const db = getFirestore(app);
 
-export{signInWithPopup,GoogleAuthProvider,provider,createUserWithEmailAndPassword,auth,signInWithEmailAndPassword,signOut}
+// Función para crear posts
+export const createPost = async(user, description) =>  {
+  const createPostColecction = await addDoc(collection(db, 'posts'), {
+   description,
+   user,
+})
+return createPostColecction;
+};
+
+export const getPost =  async (id) =>{
+ const docRef = doc(db, "posts",id);
+const docSnap = await getDoc(docRef);
+return docSnap;
+}
+export const onGetPost = async (callback) => {
+  const currentPost = await onSnapshot(query(collection(db, "posts"),
+      (callback))
+)};
+
+export const getPosts = await getDocs(collection(db, "posts"));
+
+
+export { createUserWithEmailAndPassword, auth, signInWithEmailAndPassword, provider, signInWithPopup, GoogleAuthProvider, signOut }

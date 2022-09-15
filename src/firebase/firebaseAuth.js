@@ -1,9 +1,9 @@
 import{
     auth,createUserWithEmailAndPassword,signInWithEmailAndPassword
-,GoogleAuthProvider,signInWithPopup,provider} from "../firebase/firebaseconfig.js"
+,GoogleAuthProvider,signInWithPopup,provider } from "../firebase/firebaseconfig.js"
 import { onNavigate } from "../main.js";
 
-// Funcion de registro para crear cuenta
+// Función para crear usuarios en Firebase con correo y contraseña
  export const crearCuenta = (email,password) =>{
     createUserWithEmailAndPassword(auth, email ,password)
     .then((userCredential) => {
@@ -19,6 +19,7 @@ import { onNavigate } from "../main.js";
         // ..
     });
  }
+
 // Funcion de registro para iniciar sesion
 export const iniciarSesion =(email, password) =>{
     signInWithEmailAndPassword(auth, email, password)
@@ -34,6 +35,9 @@ export const iniciarSesion =(email, password) =>{
   });
 
 }
+
+// Funcion de registro para iniciar sesion con Google
+
 export const loginwithGoogle = () => {
  signInWithPopup(auth, provider)
   .then((result) => {
