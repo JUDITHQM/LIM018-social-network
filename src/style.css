@@ -94,3 +94,29 @@ button:hover{
     padding: auto;
 
 }
+
+
+.divMuro{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid;
+    align-items: center;
+}
+
+
+.divPubli{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #FFE633;
+    border-radius: 7px;
+    margin: 2%;
+    width: 70%;
+}
+
+
+.editBtn{
+    width: 13%;
+}
+.btnEdit{
+    width: 40%;
+}

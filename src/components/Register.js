@@ -73,7 +73,8 @@ HomeDiv.appendChild(TitleRegister);   imgLogoDiv.appendChild(imgLogo);
 
     formRegister.addEventListener("submit", (e) => {
         e.preventDefault();
-        crearCuenta(inputEmail.value, inputPassword.value)
+        sessionStorage.nameUsuario = inputName.value;
+        crearCuenta(inputEmail.value, inputPassword.value);
 
     })
 

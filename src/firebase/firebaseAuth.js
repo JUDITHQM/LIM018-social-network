@@ -1,6 +1,6 @@
 import{
     auth,createUserWithEmailAndPassword,signInWithEmailAndPassword
-,GoogleAuthProvider,signInWithPopup,provider } from "../firebase/firebaseconfig.js"
+,GoogleAuthProvider,signInWithPopup,provider,signOut } from "../firebase/firebaseconfig.js"
 import { onNavigate } from "../main.js";
 
 // Función para crear usuarios en Firebase con correo y contraseña
@@ -61,3 +61,14 @@ export const loginwithGoogle = () => {
     // ...
   });
 };
+
+export const userLin = auth.currentUser;
+
+
+export const signOutUser = () => signOut(auth)
+  .then(() => {
+    onNavigate('/');
+    sessionStorage.clear();
+  }).catch((error) => {
+  // An error happened.
+  });

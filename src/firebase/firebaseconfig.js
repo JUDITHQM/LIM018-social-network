@@ -1,9 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
-
-import { getFirestore, addDoc, collection, getDocs,doc , getDoc } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
-
+import { getFirestore, addDoc, collection, getDocs, doc, getDoc,onSnapshot, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js" ;
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,25 +27,27 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 // Función para crear posts
-export const createPost = async(user, description) =>  {
+export const createPost = async (user, description) => {
   const createPostColecction = await addDoc(collection(db, 'posts'), {
-   description,
-   user,
-})
-return createPostColecction;
+    description,
+    user,
+  })
+  return createPostColecction;
 };
 
-export const getPost =  async (id) =>{
- const docRef = doc(db, "posts",id);
-const docSnap = await getDoc(docRef);
-return docSnap;
+export const getPost = async (id) => {
+  const docRef = doc(db, "posts", id);
+  const docSnap = await getDoc(docRef);
+  return docSnap;
 }
-export const onGetPost = async (callback) => {
-  const currentPost = await onSnapshot(query(collection(db, "posts"),
-      (callback))
-)};
+
+export const onGetPost = (callback) => onSnapshot(collection(db, 'posts'), callback);
+
+//Eliminar post
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const getPosts = await getDocs(collection(db, "posts"));
 
+export const updatePost = (id, textoeditado) => updateDoc(doc(db, 'posts', id), (textoeditado));
 
 export { createUserWithEmailAndPassword, auth, signInWithEmailAndPassword, provider, signInWithPopup, GoogleAuthProvider, signOut }

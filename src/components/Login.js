@@ -80,8 +80,7 @@ export const Login = () => {
         const email = inputEmail.value;
         const password = inputPassword.value;
     
-        iniciarSesion(email, password)
-          
+        iniciarSesion(email, password);
       });
       
       buttonLoginGoogle.addEventListener('click', (e) => {
