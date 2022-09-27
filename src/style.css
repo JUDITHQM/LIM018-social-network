@@ -5,6 +5,8 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+ 
+
 body {
     margin: 0;
     padding: 0;
@@ -25,7 +27,7 @@ body {
  
 }
 .homeDiv button{
-    margin: 5px;
+    margin: 5px; 
     width: 80%;
     padding: 5px;
     border-radius: 8px;
@@ -120,3 +122,78 @@ button:hover{
 .btnEdit{
     width: 40%;
 }
+
+.principalContent {
+    display: flex;
+    justify-content: center;
+
+}
+
+.publicationDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.publicationDiv textarea {
+    border-radius: 12px;
+    width: 15rem;
+    height: 3rem;
+}
+
+aside {
+    display: flex;
+    justify-content: center;
+}
+
+
+aside button {
+
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    background-color: rgb(202, 32, 32);
+    width: 8rem;
+    height: 3rem;
+    border-radius: 12px;
+    border: none;
+
+}
+
+.divPubli {
+
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+
+}
+
+.containerBtn  {
+
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 12px;
+}
+
+.containerBtn  button {
+    width: 8rem;
+    height: 2rem;
+}
+
+.btnE button {
+    background-color: #FFE633;
+    border-radius: 12px;
+    border: none;
+}
+
+.btnD button {
+    background-color: tomato;
+    border-radius: 12px;
+    border: none;
+}
+
+
+
