@@ -5,27 +5,23 @@
     font-family: 'Montserrat', sans-serif;
 }
 
- 
-
 body {
     margin: 0;
     padding: 0;
-    width: 100vw;
-        background-image: linear-gradient(90deg, rgb(240, 241, 231) 0%, rgba(219, 208, 184, 0.541) 0%), url('./img/personas.jpg');
-        margin: 0px;
-        padding: 0px;
-        background-size: cover;
-
 }
 .homeDiv{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 3%;
-    border-radius: 8px;
- 
+    justify-content: center; 
+    margin: auto;
+    background:  hsla(127, 45%, 81%, 0.676) url('./img/personas.jpg');
+    background-blend-mode: lighten;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
+
 .homeDiv button{
     margin: 5px; 
     width: 80%;
@@ -41,6 +37,16 @@ body {
     font-size: 15px;
     font-weight: 70;
 }
+
+.textRegister, .textLogin{
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+
+
 .formLogin ::placeholder{
     font-size: 15px;
     font-weight: 70;
@@ -97,22 +103,20 @@ button:hover{
 
 }
 
-
 .divMuro{
     display: flex;
     flex-direction: column;
-    border: 3px solid;
     align-items: center;
 }
-
 
 .divPubli{
     display: flex;
     flex-direction: column;
-    border: 3px solid #FFE633;
-    border-radius: 7px;
-    margin: 2%;
-    width: 70%;
+    background-color: #e9e7d6;
+    display: flex;
+    flex-direction: column;
+    
+    
 }
 
 
@@ -137,9 +141,11 @@ button:hover{
 }
 
 .publicationDiv textarea {
-    border-radius: 12px;
-    width: 15rem;
-    height: 3rem;
+    border-radius: 5px;
+    width: 20rem;
+    height: 5rem;
+    background-color: #f4f2df;
+
 }
 
 aside {
@@ -152,48 +158,54 @@ aside button {
 
     margin-top: 3rem;
     margin-bottom: 1rem;
-    background-color: rgb(202, 32, 32);
+    background-color: rgb(245, 48, 48);
     width: 8rem;
     height: 3rem;
     border-radius: 12px;
     border: none;
 
 }
-
+.homeDivTimeLine{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    margin: auto;
+    background:  hsla(127, 45%, 81%, 0.676) url('./img/personas.jpg');
+    background-blend-mode: lighten;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
 .divPubli {
 
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-
-
 }
 
 .containerBtn  {
 
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: end;
-    gap: 12px;
+    gap: 10px;
 }
 
 .containerBtn  button {
-    width: 8rem;
+    width: 4rem;
     height: 2rem;
 }
 
 .btnE button {
-    background-color: #FFE633;
-    border-radius: 12px;
+    background-color: #f2dc14;
+    border-radius: 5px;
     border: none;
 }
 
 .btnD button {
-    background-color: tomato;
-    border-radius: 12px;
+    background-color: rgb(228, 20, 20);
+    border-radius: 5px;
     border: none;
 }
-
-
 

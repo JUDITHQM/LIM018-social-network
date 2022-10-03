@@ -3,8 +3,12 @@ import { createPost, getPosts, getPost, onGetPost, deletePost, updatePost } from
 import { signOutUser, userLin } from "../firebase/firebaseAuth.js";
 export const Timeline = () => {
       const HomeDiv = document.createElement('div');
-      HomeDiv.textContent = 'Bienvenido al Timeline';
+      HomeDiv.classList = 'homeDivTimeLine';
 
+      const titleTime = document.createElement('h1')
+      
+      titleTime.textContent = 'BIENVENIDOS AL TIMELINE';
+      titleTime.className = 'titleHome'
       /* ---------- */
       const principalContent = document.createElement('div');
       principalContent.className = 'principalContent';
@@ -47,7 +51,8 @@ export const Timeline = () => {
            `;
       divmodal.innerHTML = modalstr;
       const editform = divmodal.querySelector('.editform');
-
+      
+      HomeDiv.appendChild(titleTime);
       profile.appendChild(bttnsignout);
       HomeDiv.appendChild(principalContent);
 

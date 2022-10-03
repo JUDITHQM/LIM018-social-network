@@ -4,7 +4,7 @@ import { onNavigate } from "../main.js";
 export const Register = () => {
     const HomeDiv = document.createElement('div');
     HomeDiv.className = 'homeDiv';
-      /* ---------- */
+    /* ---------- */
     const logoTitleDiv = document.createElement('div');
     logoTitleDiv.className = 'logoTitleDiv';
 
@@ -15,15 +15,15 @@ export const Register = () => {
     imgLogo.src = '../img/logo.png';
     imgLogo.id = 'imgLogo';
 
-    const TitleRegister =document.createElement('h3')
-    TitleRegister.textContent = 'FORMULARIO DE REGISTRO';
-    TitleRegister.className='TitleRegister'
+    const titleRegister = document.createElement('h1')
+    titleRegister.textContent = 'FORMULARIO DE REGISTRO';
+    titleRegister.className = 'titleRegister'
 
 
     /* ---------- */
     const pRegister = document.createElement('h3');
     pRegister.textContent = 'INGRESA TUS DATOS Y CREA TU CUENTA';
-      
+
     const formRegister = document.createElement('form');
     formRegister.className = 'formRegister';
 
@@ -38,7 +38,7 @@ export const Register = () => {
     const inputPassword = document.createElement('input');
     inputPassword.type = 'password';
     inputPassword.placeholder = 'Ingresa tu contraseña';
-    
+
     const formDiv = document.createElement('div');
 
     const buttonRegister = document.createElement('button')
@@ -52,9 +52,10 @@ export const Register = () => {
     buttonHome.addEventListener('click', () => onNavigate('/'));
 
 
-HomeDiv.appendChild(TitleRegister);   imgLogoDiv.appendChild(imgLogo);
+    HomeDiv.appendChild(titleRegister);
+    imgLogoDiv.appendChild(imgLogo);
     logoTitleDiv.appendChild(imgLogoDiv);
-    
+
     HomeDiv.appendChild(logoTitleDiv);
 
     formRegister.appendChild(inputName);
@@ -62,11 +63,11 @@ HomeDiv.appendChild(TitleRegister);   imgLogoDiv.appendChild(imgLogo);
     formRegister.appendChild(inputPassword);
     formRegister.appendChild(buttonRegister);
     formRegister.appendChild(buttonHome);
-    
+
     formDiv.appendChild(pRegister);
     formDiv.appendChild(formRegister);
-    
-    
+
+
     HomeDiv.appendChild(pRegister);
     HomeDiv.appendChild(formRegister);
     HomeDiv.appendChild(formDiv);
