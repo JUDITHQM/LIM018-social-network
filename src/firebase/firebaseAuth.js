@@ -1,74 +1,26 @@
-import{
-    auth,createUserWithEmailAndPassword,signInWithEmailAndPassword
-,GoogleAuthProvider,signInWithPopup,provider,signOut } from "../firebase/firebaseconfig.js"
-import { onNavigate } from "../main.js";
-
+import {
+  auth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signInWithPopup, provider, signOut, updateProfile,
+} from './firebaseconfig.js';
 // Función para crear usuarios en Firebase con correo y contraseña
- export const crearCuenta = (email,password) =>{
-    createUserWithEmailAndPassword(auth, email ,password)
-    .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        if (user) {
-           onNavigate ('/login'); 
-        }      
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-    });
- }
+// eslint-disable-next-line max-len
+export const createUserWithEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 
 // Funcion de registro para iniciar sesion
-export const iniciarSesion =(email, password) =>{
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    if (user) {
-        onNavigate('/timeline'); }
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
 
-}
+// eslint-disable-next-line max-len
+export const signInWithEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
 // Funcion de registro para iniciar sesion con Google
 
-export const loginwithGoogle = () => {
- signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-  
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user);
-      sessionStorage.nameGoogle = user.displayName;
-      onNavigate('/timeline');
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
+export function signOutLogin() { return signOut(auth); }
+
+/* ----- Update Profile */
+export function updateProfileUser(userName, userId) {
+  return updateProfile(auth.currentUser, {
+    displayName: userName,
+    uid: userId,
   });
-};
-
-export const userLin = auth.currentUser;
-
-
-export const signOutUser = () => signOut(auth)
-  .then(() => {
-    onNavigate('/');
-    sessionStorage.clear();
-  }).catch((error) => {
-  // An error happened.
-  });
+}

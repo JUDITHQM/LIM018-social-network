@@ -1,173 +1,199 @@
-//import { onNavigate } from "../main.js";
-import { createPost, getPosts, getPost, onGetPost, deletePost, updatePost } from "../firebase/firebaseconfig.js";
-import { signOutUser, userLin } from "../firebase/firebaseAuth.js";
+import {
+  stateChangedUser, addPost, auth, onGetPost, getPost, deletePost, editPost,
+} from '../firebase/firebaseconfig.js';
+// eslint-disable-next-line import/no-cycle
+import { onNavigate } from '../main.js';
+import setHeader from './Header.js';
+// eslint-disable-next-line import/no-cycle
+import { signOutUser } from '../lib/index.js';
+
 export const Timeline = () => {
-      const HomeDiv = document.createElement('div');
-      HomeDiv.classList = 'homeDivTimeLine';
+  const HomeDiv = document.createElement('div');
+  HomeDiv.classList = 'homeDivTimeLine';
 
-      const titleTime = document.createElement('h1')
-      
-      titleTime.textContent = 'BIENVENIDOS AL TIMELINE';
-      titleTime.className = 'titleHome'
-      /* ---------- */
-      const principalContent = document.createElement('div');
-      principalContent.className = 'principalContent';
+  /* ---------- */
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'headerDiv';
 
-      const publicationDiv = document.createElement('form');
-      publicationDiv.className = 'publicationDiv';
+  setHeader(headerDiv, signOutUser);
 
-      const textPublication = document.createElement('textarea');
-      textPublication.placeholder = '¿Alguna novedad?';
-      textPublication.setAttribute("type", "text");
-      //textPublication.id = 'textPublication';
+  /* ---------- */
 
-      const buttonPublication = document.createElement('button');
-      //buttonPublication
-      buttonPublication.textContent = 'Publicar';
+  const principalContent = document.createElement('div');
+  principalContent.className = 'principalContent';
 
-      const postConteiner = document.createElement('article');
+  const publicationDiv = document.createElement('form');
+  publicationDiv.className = 'publicationDiv';
 
-      const divmuro = document.createElement('div');
-      divmuro.className = "divMuro";
+  const userDiv = document.createElement('div');
+  publicationDiv.appendChild(userDiv);
 
-      const divmodal = document.createElement('div');
+  const textPublication = document.createElement('textarea');
+  textPublication.placeholder = '¿Alguna novedad?';
+  const buttonPublication = document.createElement('button');
+  buttonPublication.textContent = 'Publicar';
+  buttonPublication.id = 'buttonPublication';
 
-      publicationDiv.appendChild(textPublication);
-      publicationDiv.appendChild(buttonPublication);
-      principalContent.appendChild(publicationDiv);
-      principalContent.appendChild(postConteiner);
-
-      const profile = document.createElement('aside');
-      const bttnsignout = document.createElement('button');
-      bttnsignout.textContent = 'Cerrar Sesión';
-
-      const modalstr = `
-      <div class="editform" id ="editform" style="display: none">
-          <form>
-          <textarea class="inputEdit"> </textarea>
-          <button type="submit">Guardar</button>
-          </form>
-          </div>
-           `;
-      divmodal.innerHTML = modalstr;
-      const editform = divmodal.querySelector('.editform');
-      
-      HomeDiv.appendChild(titleTime);
-      profile.appendChild(bttnsignout);
-      HomeDiv.appendChild(principalContent);
-
-      HomeDiv.appendChild(divmodal);
-      HomeDiv.appendChild(divmuro);
-      HomeDiv.appendChild(profile);
-
-
-      onGetPost((querySnapshot) => {
-            let html = '';
-
-            querySnapshot.forEach((doc) => {
-                  const post = doc.data();
-
-                  // eslint-disable-next-line no-template-curly-in-string
-                  html += `
-        <div class= "divPubli">
-         <h3 class= "user"> ${post.user}</h3>  
-         <p> ${post.description} </p>
-         <div class="containerBtn">
-         <div class= btnE>
-         <button class='btnEdit' data-id="${doc.id}"> Editar </button>
-         </div>
-         <div class="btnD">
-         <button class='btndelete' data-id="${doc.id}"> Borrar </button>
-         </div>
-         </div>
-        </div>
-        `;
-            });
-            divmuro.innerHTML = html;
-
-
-            const btnsdelete = divmuro.querySelectorAll('.btndelete');
-
-            btnsdelete.forEach((btn) => {
-                  btn.addEventListener('click', (event) => {
-                        deletePost(event.target.dataset.id);
-                  });
-            });
-
-            const btnsEditPost = divmuro.querySelectorAll('.btnEdit');
-            const inputEdit = divmodal.querySelector('.inputEdit');
-            // let id = '';
-
-            btnsEditPost.forEach((btn) => {
-                  btn.addEventListener('click', async (e) => {
-                        const doc = await getPost(e.target.dataset.id);
-                        console.log(e.target.dataset.id);
-                        const pEdit = doc.data();
-                        localStorage.setItem('idPost', doc.id);
-                        inputEdit.value = pEdit.description;
-
-                        editform.style.display = 'block';
-                  });
-            });
-
-            editform.addEventListener('submit', (o) => {
-                  o.preventDefault();
-                  const newPost = inputEdit.value;
-                  console.log(newPost);
-
-                  const idEdit = localStorage.getItem('idPost');
-                  console.log(idEdit);
-
-                  updatePost(idEdit, { description: newPost });
-
-                  editform.style.display = 'none';
-            });
-
-            publicationDiv.addEventListener('submit', (e) => {
-                  e.preventDefault();
-                  const textoP = textPublication.value;
-                  //const userCreate = userCredential.user;
-                  // console.log(getPost);
-                  console.log(userLin)
-                  if (userLin.displayName== null ) {
-                        const nombrecito = sessionStorage.getItem('nameUsuario');
-                        createPost(nombrecito, textoP).then((res) => {
-                              getPost(res.id).then((postResult) => {
-                                    console.log(postResult.data());
-                                    
-                              })
-                              //getPosts.forEach((doc) => {
-                              // doc.data() is never undefined for query doc snapshots
-                              //console.log(doc.id, " => ", doc.data());
-
-                              // });
-                        });
-
-                  }
-                  else {
-                        createPost(userLin.displayName, textoP).then((res) => {
-                              getPost(res.id).then((postResult) => {
-                                    console.log(postResult.data());
-                              })
-                              //getPosts.forEach((doc) => {
-                              // doc.data() is never undefined for query doc snapshots
-                              //console.log(doc.id, " => ", doc.data());
-
-                              // });
-                        });
-
-                  }
-            });
-
+  stateChangedUser((user) => {
+    const userName = document.createElement('p');
+    if (user) {
+      const uid = user.uid;
+      const displayName = user.displayName;
+      userName.textContent = displayName;
+      while (userDiv.firstChild) {
+        userDiv.removeChild(userDiv.firstChild);
+      }
+      userDiv.appendChild(userName);
+      buttonPublication.addEventListener('click', (e) => {
+        e.preventDefault();
+        addPost({
+          nameUser: displayName,
+          description: textPublication.value,
+          dateDescription: new Date(),
+          uid,
+        }).then(() => {
+          textPublication.value = '';
+        });
       });
+    } else {
+      // User is signed out
+      onNavigate('/');
+    }
+  });
 
-      bttnsignout.addEventListener('click', (e) => {
-            e.preventDefault();
+  /* ----- Post ----- */
+  const containerDivPost = document.createElement('div');
+  containerDivPost.className = 'containerDivPost';
+  onGetPost(() => {
+    containerDivPost.innerHTML = '';
 
-            signOutUser();
+    getPost().then((post) => {
+      post.forEach((doc) => {
+        const postDescription = doc.data().description;
+        const dateDescription = doc.data().dateDescription;
+        const nameUser = doc.data().nameUser;
+        const uidUserPost = doc.data().uid;
+        const idPost = doc.id;
 
+        const divPost = document.createElement('div');
+        divPost.className = 'divPost';
+
+        const divHeaderPost = document.createElement('div');
+        divHeaderPost.className = 'divHeaderPost';
+        const nameUserPost = document.createElement('p');
+        nameUserPost.className = 'nameUserPost';
+
+        const editPostDiv = document.createElement('div');
+        editPostDiv.classList = 'editPost';
+        // const editIcon = document.createElement('img');
+        // editIcon.src = '../img/pencil.png';
+        const deletePostDiv = document.createElement('div');
+        deletePostDiv.className = 'deletePostDiv';
+        // const deleteIcon = document.createElement('img');
+        // deleteIcon.src = '../img/cross-circle.png';
+
+        divHeaderPost.appendChild(nameUserPost);
+        divHeaderPost.appendChild(editPostDiv);
+        // editPostDiv.appendChild(editIcon);
+        divHeaderPost.appendChild(deletePostDiv);
+        // deletePostDiv.appendChild(deleteIcon);
+
+        if (uidUserPost === auth.currentUser.uid) {
+          deletePostDiv.style.display = 'block';
+          editPostDiv.style.display = 'block';
+        }
+
+        const dateUserPost = document.createElement('p');
+        dateUserPost.className = 'dateUserPost';
+        const descriptionUserPostDiv = document.createElement('div');
+        descriptionUserPostDiv.className = 'descriptionUserPostDiv';
+        const descriptionUserPost = document.createElement('p');
+        descriptionUserPost.className = 'descriptionUserPost';
+
+        nameUserPost.textContent = nameUser;
+        dateUserPost.textContent = `${dateDescription.toDate().toDateString()} - ${dateDescription.toDate().toLocaleTimeString()}`;
+        descriptionUserPost.textContent = postDescription;
+
+        deletePostDiv.addEventListener('click', () => {
+          if (uidUserPost === auth.currentUser.uid) {
+            deletePost(idPost);
+          } else {
+            // eslint-disable-next-line no-alert
+            alert('No puedes eliminar este post, por que no te pertenece!');
+          }
+        });
+
+        editPostDiv.addEventListener('click', () => {
+          if (uidUserPost === auth.currentUser.uid) {
+            const text = postDescription;
+            // eslint-disable-next-line no-use-before-define
+            editModal(containerDivPost, text, idPost);
+          } else {
+            // eslint-disable-next-line no-alert
+            alert('No puedes editar este post, por que no te pertenece!');
+          }
+        });
+
+        divPost.appendChild(divHeaderPost);
+        divPost.appendChild(dateUserPost);
+        divPost.appendChild(descriptionUserPostDiv);
+
+        descriptionUserPostDiv.appendChild(descriptionUserPost);
+        containerDivPost.appendChild(divPost);
+        principalContent.appendChild(containerDivPost);
       });
+    });
+  });
+  /* ---------- */
+  const navDiv = document.createElement('div');
+  navDiv.className = 'navDiv';
 
-      return HomeDiv;
+  const homeIcon = document.createElement('div');
+  homeIcon.className = 'homeIcon';
 
-}
+  const publicationIcon = document.createElement('div');
+  publicationIcon.className = 'publicationIcon';
+
+  const profileIcon = document.createElement('div');
+  profileIcon.className = 'profileIcon';
+
+  navDiv.appendChild(homeIcon);
+  navDiv.appendChild(publicationIcon);
+  navDiv.appendChild(profileIcon);
+
+  principalContent.appendChild(publicationDiv);
+  // principalContent.appendChild(post);
+  publicationDiv.appendChild(textPublication);
+  publicationDiv.appendChild(buttonPublication);
+  HomeDiv.appendChild(headerDiv);
+  HomeDiv.appendChild(principalContent);
+  // HomeDiv.appendChild(post);
+  HomeDiv.appendChild(navDiv);
+
+  return HomeDiv;
+};
+
+function editModal(div, text, idPost) {
+  const divBlock = document.createElement('div');
+  divBlock.className = 'divBlock';
+  const divPost = document.createElement('div');
+  divPost.className = 'divPost divEditPost';
+  const closeEditModal = document.createElement('div');
+  closeEditModal.textContent = '❌';
+  closeEditModal.className = 'closeEditModal';
+  const textEdit = document.createElement('textarea');
+  textEdit.className = 'textEdit';
+  textEdit.value = text;
+  const buttonSave = document.createElement('button');
+  buttonSave.textContent = 'Guardar';
+  buttonSave.id = 'buttonSave';
+
+  closeEditModal.addEventListener('click', () => { divBlock.style.display = 'none'; });
+  buttonSave.addEventListener('click', () => editPost(idPost, textEdit.value));
+
+  divPost.appendChild(closeEditModal);
+  divPost.appendChild(textEdit);
+  divPost.appendChild(buttonSave);
+  divBlock.appendChild(divPost);
+  div.appendChild(divBlock);
+};
