@@ -1,6 +1,9 @@
 // aqui exportaras las funciones que necesites
+import { signOutLogin } from '../firebase/firebaseAuth.js';
+import { onNavigate } from '../main.js';
 
-export const myFunction = () => {
-  // aqui tu codigo
-  console.log('Hola mundo!');
+export function signOutUser() {
+  return signOutLogin().then(() => {
+    onNavigate('/');
+  });
 };
