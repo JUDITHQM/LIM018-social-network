@@ -1,13 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
-import { getAuth,
+import {
+  getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
+  updateProfile,
+} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
 import {
   getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, deleteDoc, updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
@@ -42,7 +44,6 @@ export function stateChangedUser(callback) { return onAuthStateChanged(auth, cal
 // Función para crear posts
 export function addPost(publicacion) { return addDoc(collection(db, 'post'), publicacion); }
 
-
 export const postRef = collection(db, 'post');
 
 const queryPost = query(postRef, orderBy('dateDescription', 'desc'));
@@ -60,4 +61,7 @@ export function editPost(idpost, editText) {
   });
 }
 // eslint-disable-next-line max-len
-export { updateProfile, createUserWithEmailAndPassword, signInWithEmailAndPassword, provider, signInWithPopup, GoogleAuthProvider, signOut };
+export {
+  // eslint-disable-next-line max-len
+  updateProfile, createUserWithEmailAndPassword, signInWithEmailAndPassword, provider, signInWithPopup, GoogleAuthProvider, signOut,
+};
