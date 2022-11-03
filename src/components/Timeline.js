@@ -196,4 +196,4 @@ function editModal(div, text, idPost) {
   divPost.appendChild(buttonSave);
   divBlock.appendChild(divPost);
   div.appendChild(divBlock);
-};
+}

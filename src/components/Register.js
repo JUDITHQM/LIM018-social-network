@@ -1,4 +1,5 @@
 import { updateProfileUser, createUserWithEmail } from '../firebase/firebaseAuth.js';
+// eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 
 export const Register = () => {
