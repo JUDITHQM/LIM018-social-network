@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { Home } from './components/Home.js';
 // eslint-disable-next-line import/no-cycle
 import { Register } from './components/Register.js';

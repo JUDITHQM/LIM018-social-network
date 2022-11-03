@@ -1,5 +1,6 @@
 import { updateProfileUser, createUserWithEmail } from '../firebase/firebaseAuth.js';
-import { onNavigate } from './main.js';
+// eslint-disable-next-line import/no-cycle
+import { onNavigate } from '../main.js';
 
 export const Register = () => {
   const homeDiv = document.createElement('div');
